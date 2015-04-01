@@ -71,6 +71,19 @@ exports.init = function( grunt ) {
     };
 
     /**
+     * @see Checker#fix
+     */
+    JSCS.prototype.fix = function( path ) {
+        var fixPath = this.checker.fixPath( path );
+
+        fixPath.fail( function( error ) {
+            grunt.warn( error );
+        } );
+
+        return fixPath;
+    };
+
+    /**
      * Get config
      * @return {Object}
      */

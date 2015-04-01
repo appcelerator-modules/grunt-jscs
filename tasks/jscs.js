@@ -18,7 +18,11 @@ module.exports = function( grunt ) {
 
             jscs = new JSCS( options ),
             checks = this.filesSrc.map( function( path ) {
-                return jscs.check( path );
+                if ( options.fix === true ) {
+                    return jscs.fix( path );
+                } else {
+                    return jscs.check( path );
+                }
             } );
 
         Vow.allResolved( checks ).spread( function() {
